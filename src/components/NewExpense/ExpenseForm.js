@@ -32,12 +32,18 @@ const ExpenseForm = (props) => {
     //     return{...prevState,enteredDate : event.target.value}
     // });
   };
-
+  // const [buttonClick, setButtonClick] = useState(false);
+  // const AddExpenseHandler = () => {
+  //   setButtonClick(true);
+  // };
+  // const cancelHandler = () => {
+  //   setButtonClick(false);
+  // };
   const submitHandler = (event) => {
     event.preventDefault();
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate),
     };
     props.onSubmitForm(expenseData);
@@ -45,11 +51,12 @@ const ExpenseForm = (props) => {
     setEnteredAmount("");
     setEnteredDate("");
   };
+  // if (buttonClick) {
   return (
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
-          <label>Title</label>
+          <label className="new-expense__control label">Title</label>
           <input
             type="text"
             value={enteredTitle}
@@ -57,7 +64,7 @@ const ExpenseForm = (props) => {
           />
         </div>
         <div className="new-expense__control">
-          <label>Amount</label>
+          <label className="new-expense__control label">Amount</label>
           <input
             type="number"
             value={enteredAmount}
@@ -67,7 +74,7 @@ const ExpenseForm = (props) => {
           />
         </div>
         <div className="new-expense__control">
-          <label>Date</label>
+          <label className="new-expense__control label">Date</label>
           <input
             type="date"
             value={enteredDate}
@@ -78,9 +85,20 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense__actions">
-        <button type="submit">Add Expense</button>
+        <button type="button" onClick={props.onCancel}>
+          Cancel
+        </button>
+        <button type="submit">Add</button>
       </div>
     </form>
   );
+  // }
+  // return (
+  //   <div className="new-expense__actions">
+  //     <button type="button" onClick={AddExpenseHandler}>
+  //       Add Expense
+  //     </button>
+  //   </div>
+  // );
 };
 export default ExpenseForm;
